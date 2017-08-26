@@ -5,7 +5,7 @@
 
 	<groupId>com.vdzon</groupId>
 	<artifactId>configconfigurationserver</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<packaging>jar</packaging>
 
 	<name>configconfigurationserver</name>
@@ -23,14 +23,6 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Dalston.SR3</spring-cloud.version>
-
-		<!--Docker build Config-->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>com.vdzon.configconfigurationserver.ConfigconfigurationserverApplication</start-class>
-		<java.version>1.8</java.version>
-		<docker.image.name>vdzon/configurationserver</docker.image.name>
-		<docker.image.tag>configserver</docker.image.tag>
-		<!--End docker build Config-->
 
 	</properties>
 
@@ -61,47 +53,6 @@
 
 	<build>
 		<plugins>
-			<!-- We use the Resources plugin to filer Dockerfile and run.sh, it inserts actual JAR filename -->
-			<!-- The final Dockerfile will be created in target/dockerfile/Dockerfile -->
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<!-- here the phase you need -->
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/target/dockerfile</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/docker</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.4.10</version>
-				<configuration>
-					<imageName>${docker.image.name}:${docker.image.tag}</imageName>
-					<dockerDirectory>${basedir}/target/dockerfile</dockerDirectory>
-					<resources>
-						<resource>
-							<targetPath>/</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>${project.build.finalName}.jar</include>
-						</resource>
-					</resources>
-				</configuration>
-			</plugin>
-
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
