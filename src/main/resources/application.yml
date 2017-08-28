@@ -4,7 +4,7 @@ spring:
   cloud:
     config:
       server:
-        encrypt.enabled: false
+        encrypt.enabled: true
         git:
           uri: https://github.com/robbertvdzon/config-repo/
           searchPaths: smoker-backend
