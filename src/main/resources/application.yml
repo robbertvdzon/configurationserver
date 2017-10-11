@@ -7,6 +7,6 @@ spring:
         encrypt.enabled: true
         git:
           uri: https://github.com/robbertvdzon/config-repo/
-          searchPaths: smoker-backend
+          searchPaths: smoker-backend, bittrexscraper
           username: vdzon-config
           password: hJdyUIdos84dMNp(7
